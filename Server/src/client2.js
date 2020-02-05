@@ -4,5 +4,5 @@ let ws = io("http://localhost:3000");
 ws.on("connect", socket => {
   console.log(`Conectado com sucesso`);
 
-  ws.emit("message", "Client1 Conectando");
+  ws.emit("message", "Client2 Conectando");
 });

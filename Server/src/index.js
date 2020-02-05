@@ -20,22 +20,45 @@ app.use(
     limit: "50mb"
   })
 );
-app.use((req, res) => {
-  res.json({
+
+let clients = [];
+
+io.on("connect", socket => {
+  const userId = clients.length + 1;
+
+  socket.userId = userId;
+
+  const newClient = {
+    ws: socket.id,
+    userId: userId
+  };
+
+  clients.push(newClient);
+
+  console.log(
+    `cliente conectado com socketId -> ${socket.id} e id -> ${userId}`
+  );
+
+  socket.on("message", message => {
+    console.log(message);
+  });
+
+  socket.on("disconnect", reason => {
+    console.log(
+      `cliente desconectado com socketId -> ${socket.id} e id -> ${userId}`
+    );
+  });
+});
+
+app.get("/", (req, res) => {
+  return res.json({
     Version: "1.0.0"
   });
 });
 
-io.on("connect", socket => {
-  console.log(`cliente conectado = ${socket.id}`);
-  socket.on("disconnect", reason => {
-    console.log(`cliente desconectado = ${socket.id}`);
-  });
-
-  socket.on("messageC", data => {
-    console.log(`Nova mensagem do cliente: ${data}`);
-
-    socket.emit("messageS", `Olá cliente, prazer em te conhecer`);
+app.get("/api/allConnections", (req, res, next) => {
+  return res.json({
+    people: clients
   });
 });
 
