@@ -29,8 +29,8 @@ io.on("connect", socket => {
   socket.userId = userId;
 
   const newClient = {
-    ws: socket.id,
-    userId: userId
+    userId: userId,
+    ws: socket
   };
 
   clients.push(newClient);
@@ -47,6 +47,8 @@ io.on("connect", socket => {
     console.log(
       `cliente desconectado com socketId -> ${socket.id} e id -> ${userId}`
     );
+
+    clients = clients.filter(client => client.userId !== userId);
   });
 });
 
@@ -61,6 +63,18 @@ app.get("/api/allConnections", (req, res, next) => {
     people: clients
   });
 });
+
+setInterval(() => {
+  console.log(`${clients.length} pessoas conectadas`);
+
+  if (clients.length > 0) {
+    clients.forEach(client => {
+      //console.log(`Client Id ${client.userId}`);
+      const msg = `Ei id:${client.userId}: você recebeu uma nova mensagem do servidor`;
+      client.ws.emit("message", msg);
+    });
+  }
+}, 3000);
 
 app.server.listen(process.env.PORT || PORT, () => {
   console.log(`App rodando em ${app.server.address().port}`);

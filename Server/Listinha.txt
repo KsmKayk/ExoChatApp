@@ -1,0 +1,5 @@
+io("ip").emmit = enviar dado
+io("ip").on("connection/disconnection/message")
+io("ip").on("param", param => {
+  ~~~~~~~~~~
+})

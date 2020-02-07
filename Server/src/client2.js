@@ -5,4 +5,8 @@ ws.on("connect", socket => {
   console.log(`Conectado com sucesso`);
 
   ws.emit("message", "Client2 Conectando");
+
+  ws.on("message", message => {
+    console.log(message);
+  });
 });
