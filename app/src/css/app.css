@@ -1,0 +1,34 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.appMessenger {
+  display: flex;
+  flex-direction: column;
+}
+.appMessenger .header {
+  height: 50px;
+}
+.appMessenger .main {
+  display: flex;
+  height: 100%;
+}
+.appMessenger .main .leftSidebar {
+  width: 200px;
+}
+.appMessenger .main .rightSidebar {
+  width: 300px;
+}
+.appMessenger .main .content {
+  flex-grow: 1;
+}
+
+/*# sourceMappingURL=app.css.map */

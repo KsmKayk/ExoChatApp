@@ -4,7 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
-const PORT = 3000;
+const PORT = 3001;
 const app = express();
 app.server = http.createServer(app);
 const io = require("socket.io")(app.server);

@@ -1,0 +1,34 @@
+@import "variable";
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.appMessenger {
+  display: flex;
+  flex-direction: column;
+  .header {
+    height: $header-height;
+  }
+  .main {
+    display: flex;
+    height: 100%;
+    .leftSidebar {
+      width: 200px;
+    }
+    .rightSidebar {
+      width: 300px;
+    }
+    .content {
+      flex-grow: 1;
+    }
+  }
+}
