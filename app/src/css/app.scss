@@ -1,4 +1,5 @@
 @import "variable";
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 
 body,
 html {
@@ -7,25 +8,74 @@ html {
   height: 100%;
 }
 
+body {
+  color: $bodyColor;
+  font-size: 13px;
+  font-family: "roboto", sans-serif;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
+  margin: 0;
 }
 
 .appMessenger {
   display: flex;
   flex-direction: column;
   .header {
-    height: $header-height;
+    height: $headerHeight;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid $borderColor;
+    .left {
+      width: $leftSidebarWidth;
+      .actions {
+        line-height: $headerHeight;
+        padding: 0 10px;
+        button {
+        }
+      }
+    }
+    .content {
+      flex-grow: 1;
+      h2 {
+        line-height: $headerHeight;
+        text-align: center;
+      }
+    }
+    .right {
+      width: $rightSidebarWidth;
+      .userBar {
+        line-height: $headerHeight;
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 10px;
+        .profileName {
+          padding-right: 10px;
+        }
+        .profileImage {
+          line-height: $headerHeight;
+          img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 10px 0 0 0;
+          }
+        }
+      }
+    }
   }
   .main {
     display: flex;
     height: 100%;
     .leftSidebar {
-      width: 200px;
+      border-right: 1px solid $borderColor;
+      width: $leftSidebarWidth;
     }
     .rightSidebar {
-      width: 300px;
+      border-left: 1px solid $borderColor;
+      width: $rightSidebarWidth;
     }
     .content {
       flex-grow: 1;

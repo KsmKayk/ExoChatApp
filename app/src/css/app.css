@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 body,
 html {
   padding: 0;
@@ -5,9 +6,16 @@ html {
   height: 100%;
 }
 
+body {
+  color: #60a3bc;
+  font-size: 13px;
+  font-family: "roboto", sans-serif;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
+  margin: 0;
 }
 
 .appMessenger {
@@ -16,15 +24,55 @@ html {
 }
 .appMessenger .header {
   height: 50px;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.appMessenger .header .left {
+  width: 200px;
+}
+.appMessenger .header .left .actions {
+  line-height: 50px;
+  padding: 0 10px;
+}
+.appMessenger .header .content {
+  flex-grow: 1;
+}
+.appMessenger .header .content h2 {
+  line-height: 50px;
+  text-align: center;
+}
+.appMessenger .header .right {
+  width: 300px;
+}
+.appMessenger .header .right .userBar {
+  line-height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 10px;
+}
+.appMessenger .header .right .userBar .profileName {
+  padding-right: 10px;
+}
+.appMessenger .header .right .userBar .profileImage {
+  line-height: 50px;
+}
+.appMessenger .header .right .userBar .profileImage img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 10px 0 0 0;
 }
 .appMessenger .main {
   display: flex;
   height: 100%;
 }
 .appMessenger .main .leftSidebar {
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
   width: 200px;
 }
 .appMessenger .main .rightSidebar {
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
   width: 300px;
 }
 .appMessenger .main .content {
