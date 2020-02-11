@@ -23,6 +23,7 @@ body {
 .appMessenger {
   display: flex;
   flex-direction: column;
+
   .header {
     height: $headerHeight;
     display: flex;
@@ -69,6 +70,7 @@ body {
   .main {
     display: flex;
     height: 100%;
+    overflow: hidden;
     .leftSidebar {
       border-right: 1px solid $borderColor;
       width: $leftSidebarWidth;
@@ -76,9 +78,143 @@ body {
     .rightSidebar {
       border-left: 1px solid $borderColor;
       width: $rightSidebarWidth;
+      .title {
+        padding: 10px;
+      }
     }
     .content {
       flex-grow: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      .messages {
+        flex-grow: 1;
+      }
+      .messengerInput {
+        border-top: 1px solid $borderColor;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        .textInput {
+          flex-grow: 1;
+          textarea {
+            width: 100%;
+            border: 0 none;
+            height: 100%;
+            padding: 8px 15px;
+          }
+        }
+        .actions {
+          button.send {
+            background: $primaryColor;
+            color: #fff;
+            border: 0 none;
+            padding: 7px 15px;
+            line-height: 50px;
+          }
+        }
+      }
     }
   }
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
+  .message {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 15px;
+    .messageUserImage {
+      img {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+      }
+    }
+    .messageBody {
+      padding-left: 10px;
+      .messageAuthor {
+      }
+      .messageText {
+        background: $bodyColor;
+        color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+      }
+    }
+
+    &.me {
+      justify-content: flex-start;
+      .messageBody {
+        .messageText {
+          background: $primaryColor;
+        }
+      }
+    }
+  }
+}
+
+.channels {
+  .channel {
+    display: flex;
+    border-bottom: 1px solid $borderColor;
+    padding: 8px 0;
+    .userImage {
+      width: 30px;
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+    }
+
+    .channelInfo {
+      padding-left: 8px;
+      flex-grow: 1;
+      h2 {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.members {
+  .member {
+    display: flex;
+    border-bottom: 1px solid $borderColor;
+    padding: 8px;
+    .userImage {
+      width: 30px;
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+    }
+    .memberInfo {
+      padding-left: 8px;
+      flex-grow: 1;
+      h2 {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+h2.title {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
 }

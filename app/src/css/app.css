@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  color: #60a3bc;
+  color: #103c61;
   font-size: 13px;
   font-family: "roboto", sans-serif;
 }
@@ -66,6 +66,7 @@ body {
 .appMessenger .main {
   display: flex;
   height: 100%;
+  overflow: hidden;
 }
 .appMessenger .main .leftSidebar {
   border-right: 1px solid rgba(0, 0, 0, 0.05);
@@ -75,8 +76,128 @@ body {
   border-left: 1px solid rgba(0, 0, 0, 0.05);
   width: 300px;
 }
+.appMessenger .main .rightSidebar .title {
+  padding: 10px;
+}
 .appMessenger .main .content {
   flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.appMessenger .main .content .messages {
+  flex-grow: 1;
+}
+.appMessenger .main .content .messengerInput {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+}
+.appMessenger .main .content .messengerInput .textInput {
+  flex-grow: 1;
+}
+.appMessenger .main .content .messengerInput .textInput textarea {
+  width: 100%;
+  border: 0 none;
+  height: 100%;
+  padding: 8px 15px;
+}
+.appMessenger .main .content .messengerInput .actions button.send {
+  background: #78e08f;
+  color: #fff;
+  border: 0 none;
+  padding: 7px 15px;
+  line-height: 50px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
+}
+.messages .message {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 15px;
+}
+.messages .message .messageUserImage img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.messages .message .messageBody {
+  padding-left: 10px;
+}
+.messages .message .messageBody .messageText {
+  background: #103c61;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+.messages .message.me {
+  justify-content: flex-start;
+}
+.messages .message.me .messageBody .messageText {
+  background: #78e08f;
+}
+
+.channels .channel {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 8px 0;
+}
+.channels .channel .userImage {
+  width: 30px;
+}
+.channels .channel .userImage img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.channels .channel .channelInfo {
+  padding-left: 8px;
+  flex-grow: 1;
+}
+.channels .channel .channelInfo h2 {
+  font-size: 14px;
+  font-weight: 700;
+}
+.channels .channel .channelInfo p {
+  font-size: 12px;
+}
+
+.members .member {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 8px;
+}
+.members .member .userImage {
+  width: 30px;
+}
+.members .member .userImage img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.members .member .memberInfo {
+  padding-left: 8px;
+  flex-grow: 1;
+}
+.members .member .memberInfo h2 {
+  font-size: 14px;
+  font-weight: 700;
+}
+.members .member .memberInfo p {
+  font-size: 12px;
+}
+
+h2.title {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 /*# sourceMappingURL=app.css.map */
