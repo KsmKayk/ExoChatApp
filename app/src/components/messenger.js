@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 import Avatar from "../css/Avatar.png";
+import { OrderedMap } from "immutable";
+import _ from "lodash";
 
 export default class messenger extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      height: window.innerHeight,
-      messages: []
+      height: window.innerHeight
     };
 
     this._onResize = this._onResize.bind(this);
@@ -29,8 +30,9 @@ export default class messenger extends Component {
   }
 
   addTestMessages() {
-    let { messages } = this.state;
+    const { store } = this.props;
 
+    //test messages
     for (let i = 0; i < 100; i++) {
       let isMe = false;
 
@@ -38,16 +40,38 @@ export default class messenger extends Component {
         isMe = true;
       }
       const newMsg = {
+        _id: `${i}`,
         author: `${i}`,
         body: `The body of message ${i}`,
         avatar: Avatar,
         me: isMe
       };
 
-      messages.push(newMsg);
+      store.addMessage(i, newMsg);
     }
 
-    this.setState({ messages: messages });
+    //test channels
+
+    for (let c = 0; c < 10; c++) {
+      let newChannel = {
+        _id: `${c}`,
+        title: `Channel title ${c}`,
+        lastMessage: `Hey There..${c}`,
+        members: new OrderedMap({
+          "2": true,
+          "3": true,
+          "1": true
+        }),
+        messages: new OrderedMap()
+      };
+
+      let msgId = `${c}`;
+      let moreMsg = `${c + 1}`;
+      newChannel.messages = newChannel.messages.set(msgId, true);
+      newChannel.messages = newChannel.messages.set(moreMsg, true);
+
+      store.addChannel(c, newChannel);
+    }
   }
 
   componentWillUnmount() {
@@ -55,12 +79,16 @@ export default class messenger extends Component {
   }
 
   render() {
-    const { height, messages } = this.state;
+    const { store } = this.props;
+    const { height } = this.state;
     const style = {
       height: height
     };
 
-    console.log(messages);
+    const activeChannel = store.getActiveChannel();
+    const messages = store.getMessagesFromChannel(activeChannel); //store.getMessages();
+    const channels = store.getChannels();
+    const members = store.getMembersFromChannel(activeChannel);
 
     return (
       <div style={style} className="appMessenger">
@@ -85,25 +113,25 @@ export default class messenger extends Component {
         <div className="main">
           <div className="leftSidebar">
             <div className="channels">
-              <div className="channel">
-                <div className="userImage">
-                  <img src={Avatar} alt="" />
-                </div>
-                <div className="channelInfo">
-                  <h2>Jhonas Alucard</h2>
-                  <p>Hello There...</p>
-                </div>
-              </div>
-
-              <div className="channel">
-                <div className="userImage">
-                  <img src={Avatar} alt="" />
-                </div>
-                <div className="channelInfo">
-                  <h2>Lucifer MoorningStar</h2>
-                  <p>Hello There...</p>
-                </div>
-              </div>
+              {channels.map((channel, key) => {
+                return (
+                  <div
+                    onClick={key => {
+                      store.setActiveChannelId(channel._id);
+                    }}
+                    key={channel._id}
+                    className="channel"
+                  >
+                    <div className="userImage">
+                      <img src={Avatar} alt="" />
+                    </div>
+                    <div className="channelInfo">
+                      <h2>{channel.title}</h2>
+                      <p>{channel.lastMessage}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="content">
@@ -142,25 +170,19 @@ export default class messenger extends Component {
           <div className="rightSidebar">
             <h2 className="title">Members</h2>
             <div className="members">
-              <div className="member">
-                <div className="userImage">
-                  <img src={Avatar} alt="" />
-                </div>
-                <div className="memberInfo">
-                  <h2>Licifer MoorningStar</h2>
-                  <p>Joined at 3 days ago</p>
-                </div>
-              </div>
-
-              <div className="member">
-                <div className="userImage">
-                  <img src={Avatar} alt="" />
-                </div>
-                <div className="memberInfo">
-                  <h2>Jhonas Alucard</h2>
-                  <p>Joined at 5 days ago</p>
-                </div>
-              </div>
+              {members.map((member, key) => {
+                return (
+                  <div key={key} className="member">
+                    <div className="userImage">
+                      <img src={Avatar} alt="" />
+                    </div>
+                    <div className="memberInfo">
+                      <h2>{member.name}</h2>
+                      <p>Joined at 3 day ago</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
