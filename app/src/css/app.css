@@ -145,6 +145,7 @@ body {
 }
 
 .channels .channel {
+  cursor: pointer;
   display: flex;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   padding: 8px 0;
@@ -167,6 +168,9 @@ body {
 }
 .channels .channel .channelInfo p {
   font-size: 12px;
+}
+.channels .channel.active {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .members .member {

@@ -160,6 +160,7 @@ body {
 
 .channels {
   .channel {
+    cursor: pointer;
     display: flex;
     border-bottom: 1px solid $borderColor;
     padding: 8px 0;
@@ -182,6 +183,10 @@ body {
       p {
         font-size: 12px;
       }
+    }
+
+    &.active {
+      background: rgba(0, 0, 0, 0.05);
     }
   }
 }
